@@ -1,0 +1,157 @@
+$pad: 1rem;
+$radius: 8px;
+$gap: 8px;
+
+.main {
+  padding: $pad;
+  display: grid;
+  background: rebeccapurple;
+  min-height: 100vh;
+  align-content: flex-start;
+  font-family: 'Cascadia Code';
+  font-size: 1rem;
+
+  pre {
+    font-size: 1rem;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  .content {
+    display: grid;
+    padding: $pad;
+    gap: $gap;
+
+    input,
+    textarea {
+      padding: $pad;
+      border-radius: $radius;
+      width: 100%;
+    }
+
+    input[type='checkbox'] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .table {
+      display: grid;
+      grid-template-columns: min-content min-content auto;
+      color: black;
+      border-radius: $radius;
+      overflow: hidden;
+
+      .columnHeader {
+        text-align: center;
+        padding: $pad;
+        font-weight: bold;
+      }
+
+      section {
+        &:nth-child(6n + 1):not(div),
+        &:nth-child(6n + 2):not(div),
+        &:nth-child(6n + 3):not(div) {
+          background: rgb(240, 240, 240);
+        }
+      }
+
+      .columnReady {
+        display: grid;
+        align-items: center;
+
+        span {
+          font-size: 1.5rem;
+        }
+      }
+
+      .columnRoute {
+        display: grid;
+        align-items: center;
+      }
+
+      .columnRoles {
+        display: grid;
+        gap: $gap;
+        text-align: center;
+        align-items: flex-start;
+
+        .columnRolesItems {
+          display: grid;
+          gap: $gap;
+        }
+
+        .columnRole {
+          position: relative;
+          display: grid;
+          gap: $gap;
+          border-radius: $radius;
+          background: white;
+          -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.33);
+          -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.33);
+          box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.33);
+          padding: $radius;
+
+          input {
+            position: absolute;
+            inset: 0;
+            z-index: 100;
+          }
+
+          label {
+            z-index: 1;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .columnRolePermissions {
+          display: grid;
+          gap: $gap;
+          padding: 0 $radius;
+
+          .columnRolePermission {
+            position: relative;
+            border-radius: $radius;
+            padding: $radius;
+
+            input {
+              position: absolute;
+              inset: 0;
+              z-index: 100;
+            }
+
+            label {
+              z-index: 1;
+
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+
+      .columnElement {
+        display: grid;
+        background: white;
+        white-space: nowrap;
+        padding: $pad;
+      }
+    }
+
+    .result {
+      resize: vertical;
+      font-size: 1rem;
+    }
+  }
+}
