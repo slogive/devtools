@@ -99,8 +99,6 @@ export default function Home(): JSX.Element {
                           {PERMISSIONS.map((permission, permissionIdx) => {
                             const INCLUDED_PERMISSIONS = row.permissions[role.value]?.includes(permission.value) || false;
 
-                            console.log(INCLUDED_PERMISSIONS);
-
                             return (
                               <div
                                 key={permissionIdx}
@@ -114,18 +112,45 @@ export default function Home(): JSX.Element {
                                   id={`${permission.value}${roleIdx}${permissionIdx}`}
                                   checked={INCLUDED_PERMISSIONS}
                                   onChange={(evt) => {
+                                    // const checked = evt.target.checked;
+                                    // const permissionName = evt.target.name;
+                                    // const updatedPermissions = checked
+                                    //   ? {
+                                    //       ...row.permissions,
+                                    //       [role.value]: [...(row.permissions[role.value] || []), permissionName],
+                                    //     }
+                                    //   : {
+                                    //       [permissionName]: row.permissions[permissionName]?.filter(
+                                    //         (permission) => permission !== permissionName
+                                    //       ),
+                                    //     };
+
+                                    // const updatedInput = [...code.input];
+                                    // updatedInput[rowIdx] = {
+                                    //   ...updatedInput[rowIdx],
+                                    //   permissions: updatedPermissions,
+                                    // };
+
+                                    // setCode({
+                                    //   ...code,
+                                    //   input: updatedInput,
+                                    // });
+
                                     const checked = evt.target.checked;
                                     const permissionName = evt.target.name;
-                                    const updatedPermissions = checked
-                                      ? {
-                                          ...row.permissions,
-                                          [role.value]: [...(row.permissions[role.value] || []), permissionName],
-                                        }
-                                      : {
-                                          [permissionName]: row.permissions[permissionName]?.filter(
-                                            (permission) => permission !== permissionName
-                                          ),
-                                        };
+                                    const { permissions } = row;
+                                    const updatedPermissions = { ...permissions };
+
+                                    if (checked) {
+                                      updatedPermissions[role.value] = [...(permissions[role.value] || []), permissionName];
+                                    } else {
+                                      const permissionArray = updatedPermissions[role.value];
+                                      if (permissionArray) {
+                                        updatedPermissions[role.value] = permissionArray.filter(
+                                          (permission) => permission !== permissionName
+                                        );
+                                      }
+                                    }
 
                                     const updatedInput = [...code.input];
                                     updatedInput[rowIdx] = {
